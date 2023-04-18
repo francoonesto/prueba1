@@ -1,0 +1,36 @@
+*{
+    padding: 0.2%;
+    margin: 0.2%;
+}
+body{height: 180vh;}
+header{height: 15vh;width: 100%;}
+main{height: 140vh;width: 100%;}
+footer{height:25vh;width: 100%;}
+
+.nav-link {color: black;font-weight: bold;}.nav-link:hover{background-color: azure;}
+.nav-item {color: black;font-weight: bold;}
+.navbar-nav {--bs-nav-link-padding-x:null;--bs-nav-link-padding-y:null;--bs-nav-link-font-weight:null;}
+.navbar {--bs-navbar-padding-x:null;--bs-navbar-padding-y:null;}
+div ul li a{color: black;text-decoration: none;}
+div ul li{text-decoration: none;list-style: none;}
+.decoracion{display: inline;padding: 15px;}.decoracion:hover{background-color: azure;}
+.fondox{background-image:url(./images/fondo.webp) ;background-repeat: no-repeat;background-attachment:fixed;background-size:100% 100%;}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.fondoy{
+    background-color: beige;
+    opacity: 0.9;
+}
+
+.noBorde{
+    border: none;
+    color: black;
+    font-weight: bold;
+}.noBorde:hover{background-color: azure;}
+.e{
+    text-decoration: none;
+    color: black;
+}.e:hover{color: black;}
