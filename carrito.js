@@ -1,20 +1,22 @@
 let carro2 = document.querySelector('.carrito2');
 let vacio = document.getElementById('vaciar');
 let totalprecio = document.getElementById('cuenta');
-// let carrito2 = productosSeleccionados(productos);
+let final = document.getElementById('finalizar');
 baseDeDatosLs(productos);
 
 function borrarCarrito(){
     vaciar.innerHTML += `<button class="btn btn-dark e">VACIAR CARRITO</button>`
     document.getElementById('vaciar').addEventListener('click', () => {localStorage.removeItem("carrito")
-    vaciarCarrito();})
+    vaciarCarrito();
+    calculoVacio();})
 }
 
 function calculoTotal(){
     cuenta.innerHTML += `<table class="table"><tr><td>TOTAL A ABONAR : </td>
-    <td> $${totalAcumulado()}</td>
-    </tr></table> `
-
+    </tr>
+    <tr>
+    <td class="noBorde"> $${totalAcumulado()}</td>
+    </tr></table> ` ;
 }
 
 function productosSeleccionados(productos) {
@@ -33,16 +35,15 @@ function productosSeleccionados(productos) {
                    <td>${nombre}</td>
                    <td>${cantidad}</td>
                    <td>$${precio}</td>
-                   <td><button id="borra" class="btn btn-dark delete-${id}">Borrar</button></td>
+                   <td><button id="borra" class="btn btn-dark e ${id}">Borrar</button></td>
                    </tr>
                     <table>
-                   </div>
                    `
     })
 }
 
 function totalAcumulado(productosSeleccionados){
-    let calculo = carrito.reduce((acc,ite)=> acc + ite.precio * ite.cantidad, 0)
+    return carrito.reduce((acc,ite)=> acc + ite.precio * ite.cantidad, 0)
 }
 
 function vaciarCarrito(){
@@ -51,6 +52,18 @@ function vaciarCarrito(){
     : (carro2.innerHTML = `<div class="alert alert-warning" role="alert">CARRITO VACIO , RECUERDA AGREGAR PRODUCTOS</div>`) ;
 }
 
+function calculoVacio(){
+    carrito === []
+    ? (cuenta.innerHTML = totalAcumulado(productosSeleccionados()))
+    : (cuenta.innerHTML = ``);
+}
+
+function Finalizado(){
+finalizar.innerHTML += `<div><button class="btn btn-dark e>FINALIZAR COMPRA</button_></div>` ;
+// document.getElementById('finalizar').addEventListener('click', () => {})
+}
+
 productosSeleccionados(productos);
 borrarCarrito();
 calculoTotal();
+Finalizado();
