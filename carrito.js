@@ -1,7 +1,6 @@
 let carro2 = document.querySelector('.carrito2');
 let vacio = document.getElementById('vaciar');
 let totalprecio = document.getElementById('cuenta');
-let final = document.getElementById('finalizar');
 baseDeDatosLs(productos);
 
 function borrarCarrito(){
@@ -59,8 +58,9 @@ function calculoVacio(){
 }
 
 function Finalizado(){
-finalizar.innerHTML += `<div><button class="btn btn-dark e>FINALIZAR COMPRA</button_></div>` ;
-// document.getElementById('finalizar').addEventListener('click', () => {})
+    let final = document.querySelector('.pagar');
+    final.innerHTML += `<div><button class="btn btn-dark e>FINALIZAR COMPRA</button></div>` ;
+    document.querySelector('.pagar').addEventListener('click', () => {})
 }
 
 productosSeleccionados(productos);
