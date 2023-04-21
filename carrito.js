@@ -1,11 +1,20 @@
 let carro2 = document.querySelector('.carrito2');
 let vacio = document.getElementById('vaciar');
 let totalprecio = document.getElementById('cuenta');
+let final = document.querySelector('.pagar');
+let btnb = document.getElementById('borrar');
 baseDeDatosLs(productos);
 
 function borrarCarrito(){
     vaciar.innerHTML += `<button class="btn btn-dark e">VACIAR CARRITO</button>`
     document.getElementById('vaciar').addEventListener('click', () => {localStorage.removeItem("carrito")
+    Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'EL CARRITO SE HA VACIADO CON EXITO',
+        showConfirmButton: false,
+        timer: 1000
+      })
     vaciarCarrito();
     calculoVacio();})
 }
@@ -34,11 +43,14 @@ function productosSeleccionados(productos) {
                    <td>${nombre}</td>
                    <td>${cantidad}</td>
                    <td>$${precio}</td>
-                   <td><button id="borra" class="btn btn-dark e ${id}">Borrar</button></td>
+                   <td><button id="borrar" class="btn btn-dark e" ${id}">Borrar</button></td>
                    </tr>
                     <table>
                    `
     })
+    borrarCarrito();
+    
+
 }
 
 function totalAcumulado(productosSeleccionados){
@@ -57,13 +69,48 @@ function calculoVacio(){
     : (cuenta.innerHTML = ``);
 }
 
-function Finalizado(){
-    let final = document.querySelector('.pagar');
-    final.innerHTML += `<div><button class="btn btn-dark e>FINALIZAR COMPRA</button></div>` ;
-    document.querySelector('.pagar').addEventListener('click', () => {})
+function finalizado(){
+    final.innerHTML += `<button class="btn btn-dark e">FINALIZAR COMPRA</button>`
+    document.querySelector('.pagar').addEventListener('click', () => {const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'PROCEDEMOS AL PAGO?',
+        text: `El monto a abonar es : $${totalAcumulado()}`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'PAGAR',
+        cancelButtonText: 'CANCELAR',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'APROBADO',
+            'GRACIAS POR SU COMPRA',
+            'success'
+          )
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'CANCELADO',
+            'PROCESO CANCELADO',
+            'error'
+          )
+        }
+      })})
+    }
+
+function prodEliminar(id){
+document.getElementById('borrar').addEventListener('click', () => carrito.filter(item => item.id !== id))
+
 }
 
-productosSeleccionados(productos);
-borrarCarrito();
+productosSeleccionados();
 calculoTotal();
-Finalizado();
+finalizado();
