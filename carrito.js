@@ -43,13 +43,12 @@ function productosSeleccionados(productos) {
                    <td>${nombre}</td>
                    <td>${cantidad}</td>
                    <td>$${precio}</td>
-                   <td><button id="borrar" class="btn btn-dark e" ${id}">Borrar</button></td>
+                   <td><button id="borrar" class="btn btn-dark e" onclick="prodEliminar(${id})">Borrar</button></td>
                    </tr>
                     <table>
                    `
     })
     borrarCarrito();
-    
 
 }
 
@@ -107,10 +106,13 @@ function finalizado(){
     }
 
 function prodEliminar(id){
-document.getElementById('borrar').addEventListener('click', () => carrito.filter(item => item.id !== id))
-
+const carrito = productosSeleccionados();
+const productos = carrito.filter(item => item.id !== id)
+return carrito.filter(item => item.id !== id)
 }
 
 productosSeleccionados();
 calculoTotal();
 finalizado();
+prodEliminar();
+
